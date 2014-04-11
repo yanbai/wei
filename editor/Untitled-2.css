@@ -1,0 +1,144 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+body,button,input,select,textarea{font:12px/1.5 tahoma,arial,sans-serif}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+address,cite,dfn,em,var{font-style:normal}
+code,kbd,pre,samp{font-family:courier new,courier,monospace}
+small{font-size:12px}
+ul,ol{list-style:none}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+legend{color:#000}
+fieldset,img{border:0}
+button,input,select,textarea{font-size:100%}
+table{border-collapse:collapse;border-spacing:0}
+.clearfix:after{ content:"\20"; display:block; clear:both; height:0}
+.clearfix:after{ *zoom:1}
+.clear{ clear:both;}
+a{ color:#555; cursor:pointer; text-decoration:none;}
+a:hover{ color:#f60;}
+.fl{ float:left;}
+.fr{ float:right;}
+.b0{ border:0 none;}
+.m0{ margin:0;}
+.p0{ padding:0;}
+.mt10{ margin-top:10px;}
+.ml10{ margin-left:10px;}
+
+
+.edit_area {
+    background-color: #FFFFFF;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    height: 80px;
+    outline: 0 none;
+    padding: 14px 20px;
+}
+.editor_toolbar {
+    background-color: #F5F6F6;
+    background-image: linear-gradient(to bottom, #FAFAFB 0px, #F2F3F3 100%);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 1px solid #D3D3D3;
+    line-height: 36px;
+    overflow: hidden;
+    padding: 0 20px;
+}
+.icon_emotion.emotion_switch {
+    background-position: 0 -282px;
+}
+.emotion_switch {
+    float: left;
+    height: 28px;
+    line-height: 999em;
+    margin-top: 4px;
+    overflow: hidden;
+}
+.icon_emotion {
+    background: url("/image/wx/icon28_msgsender.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 28px;
+    vertical-align: middle;
+    width: 28px;
+}
+.editor_tip {
+    color: #7B7B7B;
+    float: right;
+}
+.editor_tip em {
+    font-style: normal;
+    font-weight: 400;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.emotion_editor {
+    border: 1px solid #D3D3D3;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+}
+.editor_toolbar {
+    background-color: #F5F6F6;
+    background-image: linear-gradient(to bottom, #FAFAFB 0px, #F2F3F3 100%);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 1px solid #D3D3D3;
+    line-height: 36px;
+    overflow: hidden;
+    padding: 0 20px;
+}
+.emotion_wrp {
+	display:none;
+    left: 20px;
+    position: absolute;
+    top: 100%;
+    width: 421px;
+}
+.emotions {
+    -moz-user-select: none;
+    background-color: #D3D3D3;
+    border-right: 1px solid #D3D3D3;
+    border-top: 1px solid #D3D3D3;
+    overflow: hidden;
+}
+.emotions_item {
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #D3D3D3;
+    border-left: 1px solid #D3D3D3;
+    float: left;
+    font-size: 0;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+    width: 27px;
+}
+.emotions_item i{
+	background: url("/image/wx/default.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 24px;
+    vertical-align: middle;
+    width: 24px;
+}
+
+
+
+
+
+
+
+
+.emotion_editor {
+    border: 1px solid #D3D3D3;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+}
+#reply_content_2,#reply_content_1,#reply_content_3{padding:20px 40px 0;}
+.kwDiv{padding:0 0 10px}
+#reply_content_3 table{width:100%}
+#reply_content_3 th{height:30px; line-height:30px; padding-left:15px;}
+#reply_content_3 td{vertical-align:top;}
+#reply_content_3 th,#reply_content_3 td{border:1px solid #dfdfdf;}
+#sideL{padding:15px 10px 15px 10px;}
+#sideL li{margin:0 0 10px;}
+#contentR{padding:15px 0 15px 10px;}
