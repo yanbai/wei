@@ -1,0 +1,965 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="jquery  v1.3.2.js"></script>
+<style>
+/**********  reset样式重置  ************/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}strong{font-weight:bold;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+body{font-size:14px; color:#888; font-family:"\5b8b\4f53";}
+a:link{color:#888; text-decoration:none;}
+a:visited{color:#888; text-decoration:none;}
+a:hover{color:#888; text-decoration:underline;}
+a:active{color:#888; text-decoration:none;}
+p{line-height:1.6;}
+/**********  common全局样式  ************/
+body{width:100%;}
+.conall{width:1000px; margin:0px auto; display:table}
+.left{float:left; display:inline; margin-right:10px;}
+.right{float:right; display:inline;}
+.clear{clear:both; overflow:hidden}
+.hide{display:none;}
+/**********  signup弹窗  ************/
+.overlay{width:100%; height:100%; position:fixed; _position:absolute; top:0; left:0; z-index:1; background:#fff; overflow:hidden; _height:expression((document.documentElement.clientHeight>document.documentElement.scrollHeight?document.documentElement.clientHeight:document.documentElement.scrollHeight)+'px');
+_width:expression((document.documentElement.clientWidht>document.documentElement.scrollWidth?document.documentElement.clientWidth:document.documentElement.scrollWidth)+'px'); display:none}
+.overlay2{width:100%; height:100%; position:fixed; _position:absolute; top:0; left:0; z-index:2; background:#fff; overflow:hidden; _height:expression((document.documentElement.clientHeight>document.documentElement.scrollHeight?document.documentElement.clientHeight:document.documentElement.scrollHeight)+'px');
+_width:expression((document.documentElement.clientWidht>document.documentElement.scrollWidth?document.documentElement.clientWidth:document.documentElement.scrollWidth)+'px'); display:none}
+
+#tanchuan_big{position:fixed; z-index:3; border:1px solid #cccccc; display:none}
+#tanchuan_big .tit{height:14%; padding:0 13px 0 13px; font:bold 14px/36px "宋体"; color:#666666; background:#fff; position:relative; border-bottom:2px solid #ffc35b;}
+#tanchuan_big .txt{min-height:158px; _height:158px; padding:20px; display:inline-block; background:#fff; font-size:14px;}
+#tanchuan_big .txt a{}
+#tanchuan_big .txt a:hover{text-decoration:none}
+#tanchuan_big .tit .close{position:absolute; right:10px; top:10px; cursor:pointer; background:url(cancel.png) no-repeat; height:14px; width:14px;}
+#tanchuan_big .tit .close span{display:none;}
+
+#tanchuan_small{position:fixed; z-index:3; border:1px solid #cccccc; display:none}
+#tanchuan_small .tit{height:14%; padding:0 13px 0 13px; font:bold 14px/36px "宋体"; width:352px; color:#666666; background:#fff; position:relative; border-bottom:2px solid #ffc35b;}
+#tanchuan_small .txt{min-height:158px; _height:158px; width:338px; padding:20px; display:inline-block; background:#fff; font-size:14px;}
+#tanchuan_small .txt a{}
+#tanchuan_small .txt a:hover{text-decoration:none}
+#tanchuan_small .tit .close{position:absolute; right:10px; top:10px; cursor:pointer; background:url(../%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/cancel.png) no-repeat; height:14px; width:14px;}
+#tanchuan_small .tit .close span{display:none;}
+
+#wei_pop{position:fixed; z-index:3; border:1px solid #cccccc; display:none}
+#wei_pop .tit{height:14%; padding:0 13px 0 13px; font:bold 14px/36px "宋体"; width:352px; color:#666666; background:#fff; position:relative; border-bottom:2px solid #ffc35b;}
+#wei_pop .txt{min-height:158px; _height:158px; width:338px; padding:20px; display:inline-block; background:#fff; font-size:14px;}
+#wei_pop .txt a{}
+#wei_pop .txt a:hover{text-decoration:none}
+#wei_pop .tit .close{position:absolute; right:10px; top:10px; cursor:pointer; background:url(../%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/cancel.png) no-repeat; height:14px; width:14px;}
+#wei_pop .tit .close span{display:none;}
+
+#alert_type1{width:217px; margin:0 auto}
+#alert_type1 a.wei_sure{width:81px; height:30px; line-height:30px; text-align:center}
+
+.weibo_transmit dt,.weibo_transmit dd{ float:left;}
+.weibo_transmit dl{padding:20px 0 17px; font-size:14px; border-bottom:1px dashed #ddd;}
+.weibo_transmit dl s.rank{width:16px; height:16px;display:inline-block; background-image:url(../images/icon_wb.gif); background-repeat:no-repeat;}
+.rank_01{background-position:0px -47px;}
+.rank_02{background-position:0px -72px;}
+.rank_03{background-position:0px -98px;}
+.weibo_transmit{color:#333; width:636px; padding:20px;}
+.weibo_transmit a{color:#22a2eb;}
+.weibo_transmit a.host_name,.weibo_transmit .ancestor_name{font-weight:bold;}
+.weibo_transmit .pub_con{ margin-top:20px; font-size:12px; background:#fafafa; position:relative; padding:22px 17px; }
+.weibo_transmit .pub_say{background:#f4f4f4; padding:12px 10px}
+.pub_con s.arrow_top{width:14px; height:8px; position:absolute; top:-8px; left:37px; background:url(../images/arrow_t.gif) no-repeat 0px 0px; }
+.pub_con .tit{padding-bottom:16px;}
+.pub_con .pic{padding-bottom:11px;}
+.weibo_transmit .opeart .turn_wb{float:right; color:#ddd;}
+.weibo_transmit .opeart .from_wb{float:left ; color:#999;}
+.weibo_transmit .now_host{font-size:12px; padding-top:17px;}
+.weibo_transmit .now_host .turn_wb{padding-right:13px;}
+.weibo_transmit a.wei_btn_1{background:url(lee_icons.png) no-repeat; width:81px; height:30px; display:inline-block; line-height:30px; text-align:center;}
+.weibo_transmit a.wei_btn_2{background:url(lee_icons.png) no-repeat; width:81px; height:30px; display:inline-block; line-height:30px; text-align:center;}
+.weibo_transmit a:link,.weibo_addKeyWord a:visited,.weibo_addKeyWord a:hover,.weibo_addKeyWord a:active{text-decoration:none;}
+.weibo_transmit a.wei_btn_1{background-position:-185px -95px; color:#fff; margin:0 10px 0 0; float:right; display:inline}
+.weibo_transmit a.wei_btn_2{background-position:-14px -138px; color:#000; margin:0 10px 0 0; float:right; display:inline}
+.weibo_transmit p.btn_area{overflow:hidden; width:100%; font-size:12px; padding:10px 0 0}
+.weibo_transmit p.btn_area label{float:left; display:inline; vertical-align:text-bottom}
+.weibo_transmit p.wei_bottom_line{border-bottom:1px solid #eee; width:100%; overflow:hidden; padding:7px 0 10px;}
+.weibo_transmit .select_outer{border:1px solid #dddddd; border-top:1px solid #aaa; display:inline-block; padding:5px; border-radius:2px;}
+.weibo_transmit .select_outer select{border:none;}
+.sub_text_zn {background-color: white; border: 1px solid #CCCCCC; border-radius: 3px 3px 3px 3px; box-shadow: 1px 1px 1px 0 #EAEAEA inset; height: 91px; margin-top: 12px; width: 633px;}
+.sub_text_zn textarea { border: 0 none; font-size: 14px; height: 75px; margin: 8px 0 0 10px; width: 613px;}
+
+.weibo_addKeyWord input{width:228px; height:28px; border:1px solid #dddddd; border-top:1px solid #aaaaaa; border-radius:2px}
+.weibo_addKeyWord label{display:inline-block; height:30px; line-height:30px; width:160px; text-align:right}
+.weibo_addKeyWord a{background:url(lee_icons.png) no-repeat; width:81px; height:30px; display:inline-block; line-height:30px; text-align:center;}
+.weibo_addKeyWord a:link,.weibo_addKeyWord a:visited,.weibo_addKeyWord a:hover,.weibo_addKeyWord a:active{text-decoration:none;}
+.weibo_addKeyWord a.wei_btn_1{background-position:-185px -95px; color:#fff; margin:0 10px 0 0}
+.weibo_addKeyWord a.wei_btn_2{background-position:-14px -138px; color:#000}
+.weibo_addKeyWord p.btn_area{text-align:right;}
+
+.weibo_setting_addAccount input{width:228px; height:28px; border:1px solid #dddddd; border-top:1px solid #aaaaaa; border-radius:2px}
+.weibo_setting_addAccount label{display:inline-block; height:30px; line-height:30px; width:160px; text-align:right}
+.weibo_setting_addAccount a{background:url(lee_icons.png) no-repeat; width:81px; height:30px; display:inline-block; line-height:30px; text-align:center;}
+.weibo_setting_addAccount a:link,.weibo_addKeyWord a:visited,.weibo_addKeyWord a:hover,.weibo_addKeyWord a:active{text-decoration:none;}
+.weibo_setting_addAccount a.wei_btn_1{background-position:-185px -95px; color:#fff; margin:0 10px 0 0}
+.weibo_setting_addAccount a.wei_btn_2{background-position:-14px -138px; color:#000}
+.weibo_setting_addAccount p.btn_area{text-align:right;}
+
+
+
+.weibo_addOponent p{margin:0 0 10px;}
+.weibo_addOponent input{width:228px; height:28px; border:1px solid #dddddd; border-top:1px solid #aaaaaa; border-radius:2px}
+.weibo_addOponent label{display:inline-block; height:30px; line-height:30px; width:160px; text-align:right}
+.weibo_addOponent a{background:url(lee_icons.png) no-repeat; width:81px; height:30px; display:inline-block; line-height:30px; text-align:center;}
+.weibo_addOponent a:link,.weibo_addKeyWord a:visited,.weibo_addKeyWord a:hover,.weibo_addKeyWord a:active{text-decoration:none;}
+.weibo_addOponent a.wei_btn_1{background-position:-185px -95px; color:#fff; margin:0 10px 0 0}
+.weibo_addOponent a.wei_btn_2{background-position:-14px -138px; color:#000}
+.weibo_addOponent p.btn_area{text-align:right;}
+
+.weibo_addStrategy{width:424px; padding:20px;}
+.weibo_addStrategy p,.weibo_addStrategy div{margin:10px 0;}
+.weibo_addStrategy ul{background:#eee; width:100%; overflow:hidden}
+.weibo_addStrategy ul li{float:left; display:inline;width:93px; height:27px; padding:10px 5px;}
+.weibo_addStrategy ul li a{ display:inline-block; line-height:27px; text-align:center; width:93px; height:27px;}
+.weibo_addStrategy ul li a:link,.weibo_addStrategy ul li a:visited,.weibo_addStrategy ul li a:hover,.weibo_addStrategy ul li a:active{text-decoration:none;}
+.weibo_addStrategy ul li a:hover{background:#ffc35b; color:#fff}
+.weibo_addStrategy input.wei_inputtext{width:295px; height:28px; border:1px solid #dddddd; border-top:1px solid #aaaaaa; border-radius:2px}
+.weibo_addStrategy input.wei_radio{margin:0 0px 0 10px;}
+.weibo_addStrategy p.btn_area a{background:url(lee_icons.png) no-repeat; width:81px; height:30px; display:inline-block; line-height:30px; text-align:center;}
+.weibo_addStrategy p.btn_area a.wei_btn_1{background-position:-185px -95px; color:#fff; margin:0 10px 0 0}
+.weibo_addStrategy p.btn_area a.wei_btn_2{background-position:-14px -138px; color:#000}
+.weibo_addStrategy p.btn_area{text-align:right;}
+
+
+.weibo_addAccount p{margin:0 0 10px;}
+.weibo_addAccount input.input{width:305px; height:28px; border:1px solid #dddddd; border-top:1px solid #aaaaaa; border-radius:2px}
+.weibo_addAccount label{display:inline-block; height:30px; line-height:30px; width:160px; text-align:right}
+.weibo_addAccount a{background:url(lee_icons.png) no-repeat; width:81px; height:30px; display:inline-block; line-height:30px; text-align:center;}
+.weibo_addAccount a:link,.weibo_addKeyWord a:visited,.weibo_addKeyWord a:hover,.weibo_addKeyWord a:active{text-decoration:none;}
+.weibo_addAccount a.wei_btn_1{background-position:-185px -95px; color:#fff; margin:0 10px 0 0}
+.weibo_addAccount a.wei_btn_2{background-position:-14px -138px; color:#000}
+.weibo_addAccount p.btn_area{text-align:right;}
+.weibo_addAccount .wei_rows{margin:0 0 0 117px;}
+.weibo_addAccount .wei_rows td{width:197px;}
+.weibo_addAccount .wei_rows dt{float:left; display:inline;}
+.weibo_addAccount .wei_rows dd{float:left; display:inline;}
+.weibo_addAccount .wei_rows label{height:auto; line-height:normal; width:auto;}
+
+/*
+.weibo_checkBoxPop input{width:228px; height:28px; border:1px solid #dddddd; border-top:1px solid #aaaaaa; border-radius:2px}
+*/
+.weibo_checkBoxPop a{width:81px; height:30px; background:#dfdfdf; margin:0 5px; display:inline-block; line-height:30px; text-align:center;}
+.weibo_checkBoxPop a:link,.weibo_addKeyWord a:visited,.weibo_addKeyWord a:hover,.weibo_addKeyWord a:active{text-decoration:none;}
+.weibo_checkBoxPop a.wei_btn_1{background-position:-185px -95px; color:#fff; margin:0 10px 0 0}
+.weibo_checkBoxPop a.wei_btn_2{background-position:-14px -138px; color:#000}
+.weibo_checkBoxPop p.btn_area{text-align:right;}
+
+
+
+.weibo_addAccount .select_outer {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #AAAAAA #DDDDDD #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-right: 1px solid #DDDDDD;
+    border-style: solid;
+    border-width: 1px;
+    display: inline-block;
+    padding: 5px;
+}
+.weibo_addAccount .select_outer select {
+    border: medium none;
+}
+
+
+.right{float:right; display:inline;}
+.fn-clear:after {
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+.fn-clear{*zoom:1}
+
+/*下拉列表*/
+.weibo_transmit .wei_transmit_select{width:100%; overflow:hidden; padding:15px 0 0}
+ul.select{display:inline; float:right;}
+ul.select li {float: left; display:inline; position:relative; margin:0; width:111px;}
+ul.select li a { display: block; width: 106px; line-height: 27px; padding-left: 5px; color: #595959; text-decoration: none; background: url(wei_skin.png) no-repeat -22px -69px; font-weight:normal; text-align:left}
+ul.select li .option {position: absolute; _overflow: hidden; z-index: 1; width:109px; margin-left: -1px; border: 1px solid #e7e7e7; }
+ul.select li .option li {border: none; background: none; width:109px}
+ul.select li .option li a {line-height: 21px; background: #fff; width:104px;}
+ul.select li .option li a:hover {color: #fff; background-color: #4778da;}
+
+ul.select#quickReplySelect{display:block; float:none;}
+ul.select#quickReplySelect li {float:none; display:block; position:relative; margin:0; width:100%;}
+ul.select#quickReplySelect li a {display: block; width:629px; line-height: 27px; padding-left: 5px; color: #333333; text-decoration: none; font-weight:normal; text-align:left; border:1px solid #e7e7e7; background:#f7f7f7; border-radius:4px;}
+ul.select#quickReplySelect li .option {position: absolute; _overflow: hidden; z-index: 1; width:100%; margin-left: -1px; border: 1px solid #e7e7e7; }
+ul.select#quickReplySelect li .option li {border: none; background: none; width:100%}
+ul.select#quickReplySelect li .option li a {line-height: 21px; background: #fff; width:100%;}
+ul.select#quickReplySelect li .option li a:hover {color: #fff; background-color: #4778da;}
+
+
+#data_init .wei_title{background:url(00_%E9%A2%84%E8%AE%BE_%E4%B8%A4%E6%AD%A5%EF%BC%88%E5%A4%9A%E5%B1%82%EF%BC%89_03.png) no-repeat; width:616pox; height:38px;}
+#data_init .wei_title em{display:none;}
+#data_init .wei_txt{margin:10px 0 0 60px;}
+#data_init .wei_txt img{display:block;}
+#data_init .wei_txt span{display:block; text-align:center; color:#333; font-weight:bold; line-height:33px;}
+#data_init .wei_txt a{margin:0 10px; background:#ffa200; padding:10px; display:inline-block}
+#data_init p{text-align:right;}
+#data_init a.wei_btn_2 {
+    background-position: -14px -138px;
+    color: #000000;
+}
+#data_init a:link, #data_init a:visited, #data_init a:hover, #data_init a:active {
+    text-decoration: none;
+}
+#data_init a.wei_btn_2 {
+    background: url("lee_icons.png") no-repeat scroll -14px -138px transparent;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 81px;
+	color:#ffa200
+}
+
+
+#officialSite{width:242px; padding:30px 25px; border-radius:5px; border:1px solid #e7e6e7}
+#officialSite ol li{height:28px; line-height:28px; margin:0 0 10px 0}
+#officialSite ol li label{height:28px; line-height:28px; width:auto; text-align:right; display:inline-block}
+#officialSite ol li input{width:181px; height:28px; border:1px solid #dddddd; border-top:1px solid #aaaaaa; border-radius:2px}
+</style>
+</head>
+
+<body>
+	<div id="aa"></div>
+    <div class="weibo_transmit">
+        <p class="pub_say">
+            <a href="javascript:;" class="host_name">曹政_caoz</a>：mark //<a href="javascript:;">@郭昂9</a>：收藏了 //<a href="javascript:;">@张栋_机器学习</a>:推荐，LevelDb 能够处理十亿级别规模Key-Value 型
+        数据持久性存储，可以满足绝大多数应用了
+        </p>
+        <div class="wei_transmit_select">
+        	<ul class="select box">
+                <li id="typeFilterLi"><a href="javascript:void(0)" id="typeFilter" class="ed-Animate-toggleFilter-type">关键字</a>
+                  <div id="typeCandidate" class="option" style="display: none;">
+                    <ul>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-type">关键字1</a></li>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-type">关键字2</a></li>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-type">关键字3</a></li>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-type">关键字4</a></li>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-type">关键字5</a></li>
+                    </ul>
+                  </div>
+                </li>
+            </ul>
+        </div>
+        <div class="sub_text_zn">
+            <textarea placeholder="微博内容这里输入"></textarea>
+        </div>
+        <p class="wei_bottom_line"><span class="left"></span><span class="right">快捷回复：<em class="select_outer"><select><option>对你的参与，我必须说：客官，洗洗睡吧。</option></select></em></span></p>
+        <p class="btn_area"><label><input type="checkbox" />监测此微博</label><a href="#" class="wei_btn_1">发布</a></p>
+    </div>
+    <div class="fn-clear"></div>
+    
+    <div class="weibo_addKeyWord">
+        <p>
+            <label>输入关键字：</label><input type="text"  />
+        </p>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    
+    <div class="weibo_addKeyWord">
+        <p>
+            <label>输入关键字：</label>欣欣旅游网
+        </p>
+        <p>
+            <label>包含：</label><input type="text"  />
+        </p>
+        <p>
+            <label>不包含：</label><input type="text"  />
+        </p>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    
+    <div class="weibo_setting_addAccount">
+        <p>
+            <label>平台：</label>新浪微博
+        </p>
+        <p>
+            <label>昵称：</label><input type="text"  />
+        </p>
+        <p>
+            <label>微博ID：</label><input type="text"  />
+        </p>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    
+    <div class="weibo_addStrategy">
+        <p>
+            <label><input type="radio" class="wei_radio" /> 新建策略</label><label><input type="radio" class="wei_radio" /> 新建策略</label>
+        </p>
+        <div>
+            <label>策略名称：</label><input class="wei_inputtext" type="text" />
+        </div>
+        <div>
+            <ul>
+            	<li><a href="">标准方案</a></li>
+                <li><a href="">中秋方案</a></li>
+                <li><a href="">景点推广</a></li>
+                <li><a href="">活动方案</a></li>
+            </ul>
+        </div>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    
+    <div id="weibo_addMonitor">
+        <div class="left">
+        	<form name="myform" id="myform" action="/manager/duanxin/index/" method="post">
+                <input type="text" id="wei_match_input" />
+                <select multiple="multiple" size="20" style="width:430px;" name="list1" ondblclick="moveOption(document.myform.list1, document.sendform.list2)">
+                    <option value="13598987456">宁夏旅游局</option>
+                    <option value="2">上海旅游局</option>
+                    <option value="3">北京旅游局</option>
+                    <option value="4">天津旅游局</option>
+                    <option value="5">切糕旅游局</option>
+                </select>
+            </form>
+        </div>
+        <div style="float:left; margin-top:250px;">
+            <input type="button" onclick="moveOption(document.myform.list1, document.sendform.list2)" value="添加>>">
+            <br>
+            <br>
+            <input type="button" onclick="moveOption(document.sendform.list2, document.myform.list1)" value="<<删除">
+            <br>
+            <br>
+            <input type="button" onclick="moveAll(document.myform.list1, document.sendform.list2)" value="全 选">
+            <br>
+            <br>
+            <input type="button" onclick="moveAll(document.sendform.list2, document.myform.list1)" value="全不选">
+        </div>
+        <div class="right">
+            <p>已选择的账号</p>
+            <form name="sendform">
+            	<select id="list2" ondblclick="moveOption(document.sendform.list2, document.myform.list1)" style="width:430px;" name="list2" size="20" multiple="multiple"> </select>
+            </form>
+        </div>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    <div class="fn-clear"></div>
+    
+	<div class="weibo_addOponent">
+        <p>
+            <label>微博名称：</label><input type="text"  />
+        </p>
+        <p>
+            <label>微博地址：</label><input type="text"  />
+        </p>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    
+    <div class="weibo_addOponent">
+        <p>
+            <label>角色名称：</label><input type="text"  />
+        </p>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    
+    <div class="weibo_addAccount">
+        <p>
+            <label>用户名：</label><input class="input" type="text"  />
+        </p>
+        <p>
+            <label>密码：</label><input class="input" type="text"  />
+        </p>
+        <table class="wei_rows">
+        	<tr>
+            	<td><dt>微博：</dt><dd><label><input class="checkbox" type="checkbox" /> 欣欣旅游网</label></dd></td>
+                <td>
+                    <dt>角色：</dt>
+                    <em class="select_outer">
+                        <select>
+                            <option>管理员</option>
+                            <option>超级管理员</option>
+                        </select>
+                    </em>
+                </td>
+            </tr>
+        	
+           
+        </table>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    <div class="weibo_addAccount">
+        <p>
+            <label>用户名：</label><input class="input" type="text"  />
+        </p>
+        <p>
+            <label>密码：</label><input class="input" type="text"  />
+        </p>
+        
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    <div class="weibo_checkBoxPop">
+        <p>
+            <a href="javascript:void(0)" class="e0-Rival-delRival">名人</a><a href="javascript:void(0)" class="e0-Rival-delRival">名人</a>
+        </p>
+    </div>
+    <div id="data_init">
+    	<div class="wei_title"><em>1.绑定账号</em><em>2.设置关键词</em></div>
+        <div class="wei_txt"><a href=""><img src="00_预设_两步（多层）_07.png" /><span>新浪微博</span></a><a href=""><img src="00_预设_两步（多层）_09.png" /><span>腾讯微博</span></a><a href=""><img src="00_预设_两步（多层）_11.png" /><span>人民网微博</span></a></div>
+        <p><a href="javascript:void(0)" class="wei_btn_2">下一步</a></p>
+    </div>
+    
+<!--    <div id="singleAnalysis">
+    	<div class="left">
+            <p class="singleAnalysisTit">地域分布</p>
+            <table>
+                <tr>
+                    <td>北京</td>
+                    <td>
+                        <p class="wei_keyword_ratio">
+                            <em style="width:100%;"></em>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>上海</td>
+                    <td>
+                        <p class="wei_keyword_ratio">
+                            <em style="width:100%;"></em>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>广州</td>
+                    <td>
+                        <p class="wei_keyword_ratio">
+                            <em style="width:100%;"></em>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>深圳</td>
+                    <td>
+                        <p class="wei_keyword_ratio">
+                            <em style="width:100%;"></em>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        
+        <div><p>认证比例</p></div>
+    </div>-->
+    <div id="officialSite">
+    	<ol>
+            <li>
+                <label>用户名：</label><input class="input" type="text"  />
+            </li>
+            <li>
+                <label>密&nbsp;&nbsp;码：</label><input class="input" type="text"  />
+            </li>
+        </ol>
+        <p class="btn_area"><label><input type="checkbox" />记住密码</label><a class="" href="">忘记密码</a><a class="wei_btn_1" href="">登录</a></p>
+    </div>
+    <div id="material_popup">
+    	<p></p>
+    	<ul>
+        	<li></li>
+        </ul>
+    </div>
+    <table id="material_popup">
+    	<tr><th>分类名称</th><th>操作</th><th>分类名称</th><th>操作</th></tr>
+        <tr><td>景点介绍</td><td><a href="">修改</a>|<a href="">删除</a></td></tr>
+    </table>
+    
+    <div class="weibo_transmit">
+        
+        <div class="sub_text_zn">
+            <textarea placeholder="微博内容这里输入"></textarea>
+            <i class="font_num">还可以输入<em id="content_num">140</em>字</i>
+        </div>
+        <div class="wei_transmit_select">
+        	<ul class="select box" id="quickReplySelect">
+                <li id="quickReplyFilterLi"><a href="javascript:void(0)" id="quickReplyFilter" class="ed-Animate-toggleFilter-quickReply">选择快捷回复内容</a>
+                  <div id="quickReplyCandidate" class="option" style="display: none;">
+                    <ul>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-quickReply">快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容</a></li>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-quickReply">快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容</a></li>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-quickReply">快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容</a></li>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-quickReply">快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容</a></li>
+                      <li><a href="javascript:void(0)" class="ed-Animate-setFilter-quickReply">快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容快捷回复内容</a></li>
+                    </ul>
+                  </div>
+                </li>
+            </ul>
+        </div>
+        <p><a href="" style="font-size:12px; float:right; display:inline; line-height:30px">如何设置回复内容</a></p>
+        <p class="btn_area"><label><input type="checkbox" /> 同时做为已处理</label><a class="wei_btn_2" href="">取消</a><a class="wei_btn_1" href="">批量回复</a></p>
+    </div>
+    
+    
+    <div class="weibo_transmit">
+        <div class="sub_text_zn">
+            <textarea placeholder="我们建议您设置多条有差别的快捷回复内容，否则可能被新浪标为垃圾屏蔽，我们对此不负责任！"></textarea>
+            <i class="font_num">还可以输入<em id="content_num">140</em>字</i>
+        </div>
+        <p class="btn_area"><a class="wei_btn_1" href="">保存</a></p>
+    </div>
+    
+    
+    <div class="weibo_addAccount">
+        <p>
+            <label>栏目名称：</label><input class="input" type="text"  />
+        </p>
+        <p>
+        	<label>匹配素材：</label>
+            <label class="checkboxLabel"><input type="checkbox" /> 热门话题</label><label class="checkboxLabel"><input type="checkbox" /> 热门话题2</label><label class="checkboxLabel"><input type="checkbox" /> 热门话题3</label>
+        </p>
+        <p class="btn_area"><a class="wei_btn_1" href="">确定</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    <div></div>
+    
+    
+    <div class="weibo_addAccount">
+        <p>
+            <label>用户名：</label><input class="input" type="text" />
+        </p>
+        <p>
+            <label>密码：</label><input class="input" type="text" />
+        </p>
+        <p>
+            <label>昵称：</label><input class="input" type="text" />
+        </p>
+        <p>
+            <label>微博地址：</label><input class="input" type="text" />
+        </p>
+        <p>
+            <label>微博头像：</label><input class="input" type="file" />
+            
+        </p>
+        <p class="btn_area"><a class="wei_btn_1" href="">授权</a><a class="wei_btn_2" href="">取消</a></p>
+    </div>
+    
+    <div class="weibo_transmit" id="commentSettings">
+        <div class="sub_text_zn">
+            <textarea placeholder="微博内容这里输入"></textarea>
+            <i class="font_num">还可以输入<em id="content_num">140</em>字</i>
+        </div>
+        <div class="popup_tab">
+        	<a href="">评论1</a><a href="">评论2<em></em></a>
+        </div>
+        <p>我们建议您设置多条有差别的快捷回复内容，否则可能被新浪标为垃圾屏蔽，我们对此不负责任！</p>
+        <p class="btn_area"><a class="wei_btn_2" href="">取消</a><a class="wei_btn_1" href="">批量回复</a></p>
+    </div>
+    
+    <div class="step1" id="kh-lay">\
+	<div class="kl-tag">添加用户流程：</div>\
+	<ul class="kl-step fn-clear"><li class="s1"><i>1、选择条件</i><b></b></li><li class="s2"><i>2、填写关注条件</i><b></b></li><li class="s3"><i>3、关注条件命名</i><b></b></li></ul>\
+	<div class="kl-type fn-clear"><a class="kl-tp1 e2-kh-by_search" href=""><b></b><i>搜索并关注</i></a><strong></strong><a class="kl-tp2 e2-kh-by_fans" href=""><b></b><i>关注名人的粉丝</i></a></div>\
+	\
+	<div class="kl-cond fn-clear" id="kl-cond">\
+		<div class="kl-line i-search">\
+			<em>关键词：</em>\
+			<input class="kl-inbox" name="keyword" id="kl-keyword" value="输入关键词" onblur="com.blur(this)" onfocus="com.focus(this)" />\
+		</div>\
+		<div class="kl-line">\
+			<em>性别：</em>\
+			<input type="radio" name="gender" id="gender-1" value="m" /><label for="gender-1">男</label>\
+			<input type="radio" name="gender" id="gender-2" value="f" /><label for="gender-2">女</label>\
+			<input type="radio" name="gender" id="gender-3" value="" checked="checked" /><label for="gender-3">不限</label>\
+		</div>\
+		<div class="kl-line">\
+			<em>地域：</em>\
+			<span>'+prov+'</span> <span id="cityBox"><select><option value="">不限</option></select></span>\
+		</div>\
+		<div class="kl-line">\
+			<em>TA的粉丝数在：</em>\
+			<input class="kl-inbox kl-short" name="fans_num_1" /><i class="kl-range">到</i><input class="kl-inbox kl-short" name="fans_num_2" />\
+		</div>\
+		<div class="kl-line" style="text-align:right; padding:25px 0">\
+			<button class="uiBtn uiBt2 e2-kh-kstep1"><i><b>上一步</b></i></button>\
+			<button class="uiBtn uiBt1 e2-kh-kstep3"><i><b>下一步</b></i></button>\
+		</div>\
+	</div>\
+	\
+	<div class="kl-setname">\
+		<div class="kl-awrap"><input class="kl-inbox" name="xname" id="kl-xname" style="width:470px" onfocus="com.focus(this)" onblur="com.blur(this)" value="关键字" /></div>\
+		\
+		<div class="kl-line" style="text-align:right; padding:25px 0">\
+			<button class="uiBtn uiBt2 e2-kh-kstep2"><i><b>上一步</b></i></button>\
+			<button class="uiBtn uiBt1 e2-kh-ksave"><i><b>完&nbsp;&nbsp;&nbsp;成</b></i></button>\
+		</div>\
+	</div>\
+	\
+</div>
+
+<div class="weibo_addAccount">
+    <p>
+        <label>对象：</label><label><input name="type" type="radio" />政务</label><label><input name="type" type="radio" />企业</label><label><input name="type" type="radio" />个人</label>
+    </p>
+    <p>
+        <label>类型：</label><label><input name="type_2" type="radio" />境内旅游局</label><label><input name="type_2" type="radio" />境外旅游局</label><label><input name="type_2" type="radio" />旅游协会</label><label><input name="type_2" type="radio" />景区</label>
+    </p>
+    <p>
+        <label>级别：</label><label><input name="type_3" type="radio" />省级</label><label><input name="type_3" type="radio" />市级</label><label><input name="type_3" type="radio" />县级</label>
+    </p>
+    <p>
+        <label>区域：</label><select class="input" type="text"></select>
+    </p>
+    <p class="btn_area"><a class="wei_btn_1" href="">授权</a><a class="wei_btn_2" href="">取消</a></p>
+</div>
+
+<table class="win">
+	<tbody>
+        <tr>
+            <td class="tl"></td>
+            <td class="t"></td>
+            <td class="tr"></td>
+        <tr>
+        <tr>
+        	<td class="l"></td>
+            <td class="m">
+            	<div class="whead">
+                	<div class="wtag">
+                    登录
+                    </div>
+                    <a class="close" onclick="com.hide()" title="Esc快捷关闭窗口" href="javascript:void(0)">X</a>
+				</div>
+                <div class="wbody">
+                    <div id="layerL">
+                        <form class="lg-l" autocomplete="off" onsubmit="return com.signin()">
+                        	<p>
+                                <input id="account" class="iptx1" value="请输入用户名" style="color: rgb(127, 127, 127);">
+                            </p>
+                            <p>
+                                
+                                <input id="pswd" class="iptx1" value="请输入密码" type="password">
+                            </p>
+                            <p>
+                                <span></span>
+                                <button id="rbind" type="submit">
+                                <b title="登录">登录</b>
+                                </button>
+                            </p>
+                        </form>
+                        <div class="lg-r">
+                            <p><a class="win_reglink" href="/reg">还没有帐号?</a></p>
+                            <p><a class="win_reglink" href="/reg">申请开通账号</a></p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </td>
+            <td class="r"></td>
+        </tr>
+        <tr>
+        	<td class="bl"></td>
+            <td class="b"></td>
+            <td class="br"></td>
+        </tr>
+	</tbody>
+</table>
+</body>
+<style>
+/*登录窗*/
+#layerL{width:460px; padding-bottom:15px; font-size:12px; _width:470px;}
+#layerL .lg-l{width:256px; float:left; position:relative;}
+#layerL .lg-l p{line-height:26px; height:26px;padding:0; margin-top:15px;}
+#layerL .lg-l p span{display:inline-block; width:50px; text-align:center; font-size:14px; vertical-align:middle}
+#layerL .lg-l p .iptx1{width:160px; vertical-align:middle; height:24px; line-height:24px; padding:0; margin:0; border:1px solid #CCC; text-indent:5px; background:url(../images/ipt_x1.jpg) no-repeat}
+#layerL .lg-l p a{display:inline-block; width:75px; text-align:right; color:#09F}
+#layerL .lg-r{width:200px; float:left;}
+#layerL .lg-r dl{width:180px; padding-left:30px; border-left:1px solid #dedede;}
+#layerL .lg-r dl dt{width:170px; line-height:32px; height:32px;}
+#layerL .lg-r dl dd{display:block; width:126px; line-height:24px; height:24px; padding:6px; margin:0}
+#layerL .lg-r dl dd a{display:block; width:126px; height:24px; background:url(../images/partner.png) no-repeat;}
+#layerL .lg-r dl dd .rsina{background-position:0 0}
+#layerL .lg-r dl dd .rqq{background-position:0 -24px}
+#layerL .lg-r dl dd .rkaixin{background-position:0 -72px}
+#layerL .lg-r dl dd .rsohu{background-position:0 -96px}
+#rbind{display:inline-block; height:38px; width:130px; vertical-align:middle; cursor:pointer; background:none; border:none;}
+#rbind b{display:inline-block; height:36px; line-height:36px; width:125px; vertical-align:top; background:url(../images/subbtn.jpg) no-repeat; font-size:14px; color:#fff}
+
+
+.win{text-align:left;font-size:12px;}
+.win td{padding:0;}
+.win .tl,.win .tr,.win .bl,.win .br{background:url(../images/bg_rc.png) no-repeat;_background:url(../images/bg_rc.gif) no-repeat;width:5px;height:5px;_filter:alpha(opacity=70);}
+.win .t,.win .r,.win .b,.win .l{background:url(../images/bg_alpha.png) repeat;_background:url(../images/bg_alpha.gif) repeat;_filter:alpha(opacity=70);}
+.win .tl{background-position:left top}
+.win .tr{background-position:right top}
+.win .bl{background-position:left bottom}
+.win .br{background-position:right bottom}
+.win .t,.win .b{height:5px!important;}
+.win .l,.win .r{width:5px!important;}
+.win .m{border:1px solid #a0a0a0; background-color:#fff;}
+.win .whead{height:74px; padding-left:20px; line-height:74px; font-weight:bold; color:#333333; font-size:14px; position:relative;}
+.win .whead .close{position:absolute; right:8px; top:8px; color:#333; display:block; height:15px; width:15px; line-height:15px; font-weight:100; overflow:hidden; text-align:center; font-family:"Comic Sans MS", cursive; border:1px solid #eff;}
+.win .whead .close:hover{color:#900;background-color:#999;color:#fff;}
+.win .wbody{background-color:#fff; padding:12px 20px; display:inline-block;}
+.win .m .wbody #win-medal .medal_detail_right #medal_user_list dd{float:left;}
+
+.win .warrow{width:16px; height:8px; background:url(../images/arrow4.gif) no-repeat; position:absolute; top:-8px; left:25px; overflow:hidden;}/*箭头*/
+
+
+
+
+
+#material_popup th,#material_popup td{width:150px;}
+#material_popup th,#material_popup td{height:33px;}
+#material_popup th{background:#f4f4f4; color:#787878}
+#material_popup td{height:48px;}
+#material_popup td a:link,#material_popup td a:visited,#material_popup td a:hover,#material_popup td a:active{color:#22a2eb}
+
+.sub_text_zn{position:relative;}
+.sub_text_zn i.font_num{ font-size:14px; color:#999; position:absolute; right:0; bottom:0;}
+.sub_text_zn i.font_num em{ font-family:Georgia; font-size:24px;}
+</style>
+<script>/*
+(<a href=\")(\w+)
+*/
+var a = '<a href="http://weibo.com/n/<font color="red">欣欣旅游</font>">'
+var reg=new RegExp("(<font color=\"red\">)欣欣旅游(<\/font>)","gmi");
+var c = a.replace(reg,'欣欣旅游');
+var popUp=function(){
+};
+popUp.prototype={
+	init:function(size){
+		$('body').append('<iframe class="overlay" frameborder="0" scrolling="no"></iframe><div class="overlay2"></div><div id="tanchuan_'+size+'"><div class="tit"><span></span></div><div class="txt"></div></div>')
+	},
+	//大弹出层（自适应）
+	alert_big:function(content,title,options){
+		this.init('big');
+		var o={close:1};
+		if(options!=undefined&&options.close!=undefined){$.extend(o,options);}
+		this.title=title;this.content=content;
+		var $tanchuan=$('#tanchuan_big');
+		$tanchuan.find('.tit').find('span').html(title+'<div class="close" onclick="popup.hide(&quot;tanchuan_big&quot;)"><span>x</span></div>');
+		$tanchuan.find('.txt').html(content);
+		o.close==1 ? $tanchuan.find('.close').show() : $tanchuan.find('.close').hide();
+		$('.overlay').css({opacity:0});
+		$('.overlay2').css({opacity:0.5});
+		this.dark(this.show('big'));
+		if(options!=undefined&&options.callback!=undefined&&typeof(options.callback)=='function')options.callback.apply(this,options.params);
+	},
+	//小弹出层
+	alert_small : function(content,title,options){
+		this.init('small');
+		var o={close:1};
+		if(options!=undefined&&options.close!=undefined){$.extend(o,options);}
+		this.title=title;this.content=content;
+		var $tanchuan=$('#tanchuan_small');
+		$tanchuan.find('.tit').find('span').html(title+'<div class="close" onclick="popup.hide(&quot;tanchuan_small&quot;)"><span>x</span></div>');
+		$tanchuan.find('.txt').html(content);
+		o.close==1 ? $tanchuan.find('.close').show() : $tanchuan.find('.close').hide();
+		$('.overlay').css({opacity:0});
+		$('.overlay2').css({opacity:0.5});
+		this.dark(this.show('small'));
+		if(options!=undefined&&options.callback!=undefined&&typeof(options.callback)=='function')options.callback.apply(this,options.params);
+	},
+	//第二级弹出层
+	pop_small : function(content,title,divId){
+		var o={close:1};
+		(arguments[3]!=undefined)&&$.extend(o,arguments[2]);
+		this.title=title;this.content=content;
+		if(document.getElementById(divId)){
+			$('#'+divId).append('<div id="wei_pop"><div class="tit"><span></span></div><div class="txt"></div></div>');
+			var $tanchuan=$('#wei_pop');
+			$tanchuan.find('.tit').find('span').html(title+'<div class="close" onclick="popup.hide(&quot;'+divId+'&quot;)"><span>x</span></div>');
+			$tanchuan.find('.txt').html(content);
+			o.close==1 ? $tanchuan.find('.close').show() : $tanchuan.find('.close').hide();
+			$tanchuan.fadeIn('fast')
+		}else return false;
+	},
+	show:function(size){
+		var windowHeight=document.documentElement.clientHeight>document.documentElement.scrollHeight?document.documentElement.clientHeight:document.documentElement.scrollHeight;
+		var scrollTop=document.documentElement.scrollTop;
+		switch(size){
+			case 'big' : 
+				var _w = $('#tanchuan_'+size).width()/2; 
+				var _h = $('#tanchuan_'+size).height()/2;
+				$('#tanchuan_'+size).css({left:'50%',top:'50%',marginLeft:-_w,marginTop:-_h+scrollTop}).show();
+				break;
+			case 'small' : 
+				$('#tanchuan_'+size).css({left:'50%',top:'50%',marginLeft:-196,marginTop:-121+scrollTop}).show();
+				break;
+			case 'middle' : 
+				$('#tanchuan_'+size).css({left:'50%',top:'50%',marginLeft:-232,marginTop:-121+scrollTop}).show();
+				break;
+		}
+	},
+	hide:function(id){
+		$('#'+id).hide();$('.overlay2').remove();$('.overlay').remove();
+	},
+	dark:function(callback){
+		$('#iebug_iframe').show();
+		$('.overlay').fadeIn(50,function(){});
+		$('.overlay2').fadeIn(50,function(){callback});
+	},
+	alert_type1:function(){
+		popup.alert_small('<div id="alert_type1"><p>确定删除该条件吗？</p><p><a href="#"><span>确定</span></a></p></div>','修改条件');
+	}
+};
+var popup=new popUp();
+
+function moveOption(e1, e2){
+	try{
+		for(var i=0;i<e1.options.length;i++){
+			if(e1.options[i].selected){
+			var e = e1.options[i];
+			e2.options.add(new Option(e.text, e.value));
+			e1.remove(i);
+			i=i-1
+			}
+		}
+		var total = document.getElementById("list2").options.length;
+		//document.getElementById("num").innerHTML = total;
+		//document.sendform.phone.value=getvalue(document.sendform.list2);
+	}
+	catch(e){}
+}
+
+function moveAll(e1,e2){
+	try{
+		for(var i=0;i<e1.options.length;i++){
+			var e = e1.options[i];
+			e2.options.add(new Option(e.text, e.value));
+			e1.remove(i);
+			i=i-1
+		}
+		var total = document.getElementById("list2").options.length;
+		//document.getElementById("num").innerHTML = total;
+		//document.sendform.phone.value=getvalue(document.sendform.list2);
+	}
+	catch(e){}
+}
+
+function wei_match(keyWord,wordsArray){
+	if(keyWord!=''){
+		for(var i=0,l=wordsArray.length; i<l; i++){
+			if(!wordsArray[i].match(keyWord)){
+				document.myform.list1.options[i].style.display = 'none'
+			}
+			else{document.myform.list1.options[i].style.display = 'block'}
+		}
+	}else{
+		for(var i=0,l=wordsArray.length; i<l; i++){
+			document.myform.list1.options[i].style.display = 'block'
+		}
+	}
+}
+(function(){
+	var wordsArray = [];
+	for(var i = 0,l= document.myform.list1.options.length;i<l;i++){wordsArray.push(document.myform.list1.options[i].text)}
+	document.getElementById('wei_match_input').oninput=function(){wei_match(this.value,wordsArray)}
+})()
+
+var collect=function(){
+	this.words={};
+	this.sbox=$('#rSel');
+	this.mid=G('mid').value;
+	this.regionBox=G('options');
+	this.allRegion=this.regionBox.innerHTML;
+	this.timer=null;
+};collect.prototype={
+	change:function(o){
+		var t=this;
+		var word=o.value.trim();
+		if(word==''){t.regionBox.innerHTML=t.allRegion;return}
+		
+		var code=encodeURIComponent(word);
+		if(t.words[code]!=undefined){
+			t.regionBox.innerHTML=t.words[code];
+			return;
+		}else{
+			clearTimeout(t.timer);
+			t.timer=setTimeout(function(){
+				$post({url:'collect/suggest',data:{word:word},callback:function(x){
+					t.words[code]=x;
+					t.regionBox.innerHTML=x;
+				}});
+			},300);
+		}
+	},
+	
+	//左侧点击选中
+	add:function(a,b){
+		if(b.parentNode.tagName.toLowerCase()=='a')b=b.parentNode;
+		if(b.tagName.toLowerCase()=='a'){[b][([b].hasClass('on')?'remove':'add')+'Class']('on')}},
+	//双击添加
+	insert:function(e,a){
+		e=e||window.event;
+		var b=e.target||e.srcElement;
+		if(b.parentNode.tagName.toLowerCase()=='a')b=b.parentNode;
+		if(b.tagName.toLowerCase()=='a'){
+			b.className='';
+			if(this.checkHas(b.rel)){
+				this.sbox.append(b.parentNode.cloneNode(true));
+			}
+		}
+	},
+	//双击移除
+	remove:function(e,a){
+		e=e||window.event;
+		var b=e.target||e.srcElement;
+		if(b.parentNode.tagName.toLowerCase()=='a')b=b.parentNode;
+		if(b.tagName.toLowerCase()=='a'){[b.parentNode].remove()}
+	},
+	//右侧点击选中
+	cancel:function(a,b){
+		if(b.parentNode.tagName.toLowerCase()=='a')b=b.parentNode;
+		if(b.tagName.toLowerCase()=='a'){
+			[b][([b].hasClass('on')?'remove':'add')+'Class']('on');
+		}
+	},
+	//添加>
+	addR:function(){
+		var t=this;
+		$('#options>li.on').each(function(){
+			this.className='';
+			if(t.checkHas(this.rel)){
+				var el=this.parentNode.cloneNode(true);
+				t.sbox.append(el);
+			}
+		});
+		
+	},
+	//<删除
+	delR:function(){$('#rSel>li.on').each(function(){[this.parentNode].remove()})},
+	//检查右侧是否已存在
+	checkHas:function(rel){
+		var items=$('#rSel>a');
+		for(var i=0,l=items.length;i<l;i++){
+			var el=items[i];
+			if(el.rel==rel)return false;
+		}
+		return true;
+	},
+	//展开
+	ext:function(a,o){
+		var has=[a].hasClass('ext');
+		[[a].next()][has?'hide':'show']();
+		[a][(has?'remove':'add')+'Class']('ext');
+	},
+	//提交
+	submit:function(){
+		var ids=[];
+		var mid=this.mid;
+		$('#rSel>a').each(function(){ids.push(this.rel)});
+		if(ids.length==0){alert('请至少选择一项');return;}
+		$post({url:'collect/submit',data:{ids:ids.join(','),mid:mid},callback:function(x){
+			if(x.trim()=='Done'){}
+			window.open('cncncollect://type=done');
+		}});
+	},
+	close:function(){
+		window.open('cncncollect://type=close');
+	}
+};
+
+document.domain = 'baidu.com';
+
+</script>
+</html>
