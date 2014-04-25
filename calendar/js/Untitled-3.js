@@ -158,7 +158,7 @@ MCalendar(2013,'March') wrong todo
 			if(direction == 'next'){
 				this.year = this.month == 11 ? this.year+1 : this.year
 				this.month = this.month == 11 ? 0 : this.month+1
-			}else if(direction == 'back'){
+			}else if(direction == 'prev'){
 				this.year = this.month == 0 ? this.year-1 : this.year
 				this.month = this.month == 0 ? 11 : this.month-1
 			}
